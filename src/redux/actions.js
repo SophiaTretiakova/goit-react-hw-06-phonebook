@@ -22,7 +22,7 @@ export const deleteContact = contactId => {
 
 export const setFilter = value => {
   return {
-    type: 'filters/setStatusFilter',
+    type: 'contacts/setFilter',
     payload: value,
   };
 };

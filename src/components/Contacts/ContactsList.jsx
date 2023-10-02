@@ -26,15 +26,6 @@ export const ContactsList = ({ contacts }) => {
   );
 };
 
-// ContactsList.propTypes = {
-//   contacts: propTypes.arrayOf(
-//     propTypes.shape({
-//       id: propTypes.string,
-//       name: propTypes.string,
-//       number: propTypes.string,
-//     })
-//   ),
-// };
 ContactsList.propTypes = {
   contacts: propTypes.arrayOf(
     propTypes.shape({

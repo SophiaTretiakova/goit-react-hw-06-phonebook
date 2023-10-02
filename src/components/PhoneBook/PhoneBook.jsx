@@ -58,7 +58,6 @@ export const PhoneBook = () => {
 };
 
 PhoneBook.propTypes = {
-  // dispatch: propTypes.func,
   contacts: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.string,
