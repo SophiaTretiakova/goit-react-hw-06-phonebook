@@ -6,7 +6,7 @@ import { Filter } from './Filter/Filter';
 import { GlobalStyles } from './GlobalStyles.styled';
 // import { useState, useEffect } from 'react';
 // import { createStore } from 'redux';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 export const App = () => {
   // const contacts = useSelector(state => state.contacts);
