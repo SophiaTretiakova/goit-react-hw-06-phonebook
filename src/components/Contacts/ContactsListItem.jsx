@@ -1,13 +1,12 @@
-export const ContactsListItem = ({
-  contact: { name, number },
-  onDeleteContact,
-}) => {
+export const ContactsListItem = ({ contact, onDelete }) => {
+  const { name, number } = contact;
+
   return (
     <li>
       <p>
         {name}: {number}
       </p>
-      <button onClick={onDeleteContact}>Delete</button>
+      <button onClick={onDelete}>Delete</button>
     </li>
   );
 };

@@ -4,13 +4,24 @@ import { PhoneBook } from './PhoneBook/PhoneBook';
 import { ContactsList } from './Contacts/ContactsList';
 import { Filter } from './Filter/Filter';
 import { GlobalStyles } from './GlobalStyles.styled';
-// import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 // import { createStore } from 'redux';
-// import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContact } from 'redux/actions';
+// addContact
 
 export const App = () => {
-  // const contacts = useSelector(state => state.contacts);
-  const savedContacts = JSON.parse(localStorage.getItem('contacts'));
+  const contacts = useSelector(state => state.contacts);
+  // const savedContacts = JSON.parse(localStorage.getItem('contacts'));
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const savedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
+    savedContacts.forEach(contact => {
+      dispatch(addContact(contact));
+    });
+  }, [dispatch]);
+
   return (
     <>
       <Section title="Phone book">
@@ -18,7 +29,7 @@ export const App = () => {
       </Section>
       <Section title="Contacts">
         <Filter />
-        <ContactsList contacts={savedContacts} />
+        <ContactsList contacts={contacts} />
       </Section>
 
       <GlobalStyles />

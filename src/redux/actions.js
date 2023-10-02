@@ -1,13 +1,15 @@
 import { nanoid } from 'nanoid';
 
 export const addContact = ({ name, number }) => {
+  const newContact = {
+    id: nanoid(),
+    name,
+    number,
+  };
+
   return {
     type: 'contacts/addContact',
-    payload: {
-      id: nanoid(),
-      name,
-      number,
-    },
+    payload: newContact,
   };
 };
 

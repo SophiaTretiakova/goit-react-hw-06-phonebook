@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { StyledForm, Label } from './PhoneBook.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/actions';
+import { nanoid } from 'nanoid';
 
 const AddSchema = Yup.object().shape({
   name: Yup.string()
@@ -25,29 +26,15 @@ export const PhoneBook = () => {
   const contacts = useSelector(state => state.contacts);
   return (
     <div>
-      {/* <Formik
-        initialValues={{ name: '', number: '' }}
-        validationSchema={AddSchema}
-        onSubmit={(values, actions) => {
-          addNewContact(values);
-          actions.resetForm();
-        }}
-      > */}
       <Formik
         initialValues={{ name: '', number: '' }}
         validationSchema={AddSchema}
         onSubmit={value => {
-          //     dispatch(addContact(value))
-          //   localStorage.setItem(
-          // 'contacts',
-          // JSON.stringify([...contacts, dispatch(addContact(value)])}}
-          // Dispatch the addContact action and get the result
-          const actionResult = dispatch(addContact(value));
-
-          // Assuming that addContact returns an action object with data about the new contact
-          const newContact = actionResult.payload; // Adjust this line as needed
-
-          // Update the local storage with the new contact
+          const newContact = {
+            id: nanoid(),
+            ...value,
+          };
+          dispatch(addContact(newContact));
           const updatedContacts = [...contacts, newContact];
           localStorage.setItem('contacts', JSON.stringify(updatedContacts));
         }}
@@ -71,7 +58,7 @@ export const PhoneBook = () => {
 };
 
 PhoneBook.propTypes = {
-  addNewContact: propTypes.func,
+  // dispatch: propTypes.func,
   contacts: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.string,
