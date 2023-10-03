@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/actions';
 import { setFilter } from 'redux/actions';
 
+
 export const App = () => {
   const contacts = useSelector(state => state.contacts);
   const filter = useSelector(state => state.filter);

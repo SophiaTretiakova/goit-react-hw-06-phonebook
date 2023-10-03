@@ -1,14 +1,7 @@
-// import { createStore } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { contactsReducer, filterReducer } from './reduser';
-// import { rootReducer } from './reducer';
-// import { devToolsEnhancer } from '@redux-devtools/extension';
-
 // const initialState = {
 //   contacts: [],
 //   filter: '',
 // };
-
 // const rootReducer = (state = initialState, action) => {
 //   switch (action.type) {
 //     case 'contacts/addContact':
@@ -37,8 +30,32 @@ import { contactsReducer, filterReducer } from './reduser';
 //   }
 // };
 
-// const enhancer = devToolsEnhancer();
-// export const store = createStore(rootReducer, enhancer);
-export const store = configureStore({
-  reducer: { contacts: contactsReducer, filter: filterReducer },
-});
+const contactsInitialState = [];
+
+export const contactsReducer = (state = contactsInitialState, action) => {
+  switch (action.type) {
+    case 'contacts/addContact':
+      return [...state, action.payload];
+
+    case 'contacts/deleteContact':
+      const updatedContacts = state.contacts.filter(
+        contact => contact.id !== action.payload
+      );
+      return [...state, updatedContacts];
+
+    default:
+      return state;
+  }
+};
+
+const filterInitialState = '';
+
+export const filterReducer = (state = filterInitialState, action) => {
+  switch (action.type) {
+    case 'filter/setFilter':
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
