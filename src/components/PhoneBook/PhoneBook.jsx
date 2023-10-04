@@ -3,7 +3,8 @@ import * as Yup from 'yup';
 import propTypes from 'prop-types';
 import { StyledForm, Label } from './PhoneBook.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/actions';
+import { addContact } from 'redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
 import { nanoid } from 'nanoid';
 
 const AddSchema = Yup.object().shape({
@@ -22,36 +23,49 @@ const AddSchema = Yup.object().shape({
 });
 
 export const PhoneBook = () => {
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+
+  const addNewContact = newContact => {
+    const isInContacts = contacts.filter(contact => {
+      return newContact.name === contact.name;
+    }).length;
+
+    if (isInContacts) {
+      alert(`${newContact.name} is already in contacts`);
+      return;
+    }
+    dispatch(addContact(newContact));
+  };
+
   return (
     <div>
       <Formik
         initialValues={{ name: '', number: '' }}
         validationSchema={AddSchema}
-        onSubmit={value => {
+        onSubmit={contact => {
           const newContact = {
             id: nanoid(),
-            ...value,
+            ...contact,
           };
-          dispatch(addContact(newContact));
-          const updatedContacts = [...contacts, newContact];
-          localStorage.setItem('contacts', JSON.stringify(updatedContacts));
+          addNewContact(newContact);
         }}
       >
-        <StyledForm>
-          <Label>
-            <p>Name</p>
-            <Field name="name" type="text" />
-            <ErrorMessage name="name"></ErrorMessage>
-          </Label>
-          <Label>
-            <p>Number</p>
-            <Field name="number" type="tel" />
-            <ErrorMessage name="number"></ErrorMessage>
-          </Label>
-          <button type="submit">Add contact</button>
-        </StyledForm>
+        {({ handleSubmit }) => (
+          <StyledForm onSubmit={handleSubmit}>
+            <Label>
+              <p>Name</p>
+              <Field name="name" type="text" />
+              <ErrorMessage name="name" component="div" />
+            </Label>
+            <Label>
+              <p>Number</p>
+              <Field name="number" type="tel" />
+              <ErrorMessage name="number" component="div" />
+            </Label>
+            <button type="submit">Add contact</button>
+          </StyledForm>
+        )}
       </Formik>
     </div>
   );

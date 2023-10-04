@@ -1,12 +1,13 @@
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/actions';
 import { ContactsListItem } from './ContactsListItem';
 import propTypes from 'prop-types';
+import { deleteContact } from 'redux/contactsSlice';
 
 export const ContactsList = ({ contacts }) => {
   const dispatch = useDispatch();
   const handleDeleteContact = contactId => {
     dispatch(deleteContact(contactId));
+
     const updatedContacts = contacts.filter(
       contact => contact.id !== contactId
     );

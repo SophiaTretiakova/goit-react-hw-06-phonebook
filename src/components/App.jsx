@@ -5,13 +5,14 @@ import { Filter } from './Filter/Filter';
 import { GlobalStyles } from './GlobalStyles.styled';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/actions';
-import { setFilter } from 'redux/actions';
 
+import { addContact } from 'redux/contactsSlice';
+import { setFilter } from 'redux/filterSlice';
+import { getContacts, getFilter } from 'redux/selectors';
 
 export const App = () => {
-  const contacts = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
   useEffect(() => {

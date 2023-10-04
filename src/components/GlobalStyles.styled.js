@@ -41,5 +41,6 @@ button:active:after{
 #root{
     display: flex;
     flex-direction: column;
+     /* background: linear-gradient(0.25turn, #ec7fff, #ebf8e1, #f69d3c); */
 }
 `;
