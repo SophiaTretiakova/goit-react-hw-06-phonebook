@@ -5,7 +5,6 @@ import { StyledForm, Label } from './PhoneBook.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
-import { nanoid } from 'nanoid';
 
 const AddSchema = Yup.object().shape({
   name: Yup.string()
@@ -32,10 +31,10 @@ export const PhoneBook = () => {
     }).length;
 
     if (isInContacts) {
-      alert(`${newContact.name} is already in contacts`);
+      alert(`${newContact.name} is already in your contacts`);
       return;
     }
-    dispatch(addContact(newContact));
+    dispatch(addContact({ ...newContact }));
   };
 
   return (
@@ -45,7 +44,6 @@ export const PhoneBook = () => {
         validationSchema={AddSchema}
         onSubmit={contact => {
           const newContact = {
-            id: nanoid(),
             ...contact,
           };
           addNewContact(newContact);

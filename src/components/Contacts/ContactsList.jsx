@@ -16,13 +16,15 @@ export const ContactsList = ({ contacts }) => {
   return (
     <ul>
       {contacts.length > 0 &&
-        contacts.map(contact => (
-          <ContactsListItem
-            key={contact.id}
-            contact={contact}
-            onDelete={() => handleDeleteContact(contact.id)}
-          />
-        ))}
+        contacts.map(contact => {
+          return (
+            <ContactsListItem
+              key={contact.id}
+              contact={contact}
+              onDelete={() => handleDeleteContact(contact.id)}
+            />
+          );
+        })}
     </ul>
   );
 };
