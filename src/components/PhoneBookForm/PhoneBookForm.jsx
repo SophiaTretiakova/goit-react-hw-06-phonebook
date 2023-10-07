@@ -1,7 +1,6 @@
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import propTypes from 'prop-types';
-import { StyledForm, Label } from './PhoneBook.styled';
+import { StyledForm, Label } from './PhoneBookForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
@@ -67,14 +66,4 @@ export const PhoneBook = () => {
       </Formik>
     </div>
   );
-};
-
-PhoneBook.propTypes = {
-  contacts: propTypes.arrayOf(
-    propTypes.shape({
-      id: propTypes.string,
-      name: propTypes.string,
-      number: propTypes.string,
-    })
-  ),
 };

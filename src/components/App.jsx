@@ -1,5 +1,5 @@
 import { Section } from './Section/Section';
-import { PhoneBook } from './PhoneBook/PhoneBook';
+import { PhoneBook } from './PhoneBookForm/PhoneBookForm';
 import { ContactsList } from './Contacts/ContactsList';
 import { Filter } from './Filter/Filter';
 import { GlobalStyles } from './GlobalStyles.styled';
